@@ -1,0 +1,63 @@
+<div class="search">
+    <form #form="ngForm" (submit)="onSubmit()">
+        <input type="text" placeholder="Wyszukaj miasto" name="city" [(ngModel)]="cityName">
+    </form>
+</div>
+
+<div class="kontener" *ngIf="DanePogody$ | async as DanePogody"> 
+    <div class="gorne-dane">
+        <img src="../assets/ciepło.jpg" *ngIf="DanePogody.main.temp > 15">
+        <img src="../assets/zimno.jpg" *ngIf="DanePogody.main.temp <= 15">
+
+        <div class="dane-pogodowe">
+            <div class="lokacja">{{ DanePogody.name }}</div>
+            <div class="temperatura">{{ DanePogody.main.temp | number: '1.0-0'}}°C</div>
+        </div>
+    </div>
+
+    <div class="dolne-dane">
+        <div class="wiecej-informacji">
+            Więcej informacji
+        </div>  
+            <div class="kontener-wiecej-informacji">
+                <div class="informacje">
+                    <div class="informacje-zdjecie">
+                        <img src="../assets/min.png">
+                        <span>min</span>
+                    </div>
+                    <div class="informacje-dane">
+                      {{DanePogody.main.temp_min | number: '1.0-0'}}°C  
+                    </div>
+                </div>
+                <div class="informacje">
+                    <div class="informacje-zdjecie">
+                        <img src="../assets/max.png">
+                        <span>max</span>
+                    </div>
+                    <div class="informacje-dane">
+                        {{DanePogody.main.temp_max | number: '1.0-0'}}°C  
+                    </div>
+                </div><div class="informacje">
+                    <div class="informacje-zdjecie">
+                        <img src="../assets/wilgotność.png">
+                        <span>wilgotność</span>
+                    </div>
+                    <div class="informacje-dane">
+                        {{DanePogody.main.humidity}}% 
+                    </div>
+                </div><div class="informacje">
+                    <div class="informacje-zdjecie">
+                        <img src="../assets/wiatr.png">
+                        <span>wiatr</span>
+                    </div>
+                    <div class="informacje-dane">
+                        {{DanePogody.wind.speed}} km/h 
+                    </div>
+                </div>
+            </div>
+
+    </div>
+   
+</div>
+
+<router-outlet></router-outlet>
